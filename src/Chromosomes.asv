@@ -80,9 +80,9 @@ figure(2), imshow(MatBinary);
 
 % Alternative Method: Image Processing Toolbox Function bwareaopen, bwmorph
 MatBinary2 = 1 - MatBinary;
-MatThin = bwareaopen(MatBinary2, 5);
-MatSkeleton = bwmorph(MatThin, 'skel', inf);
-figure(3), imshow(MatSkeleton);
+thinImg = bwareaopen(MatBinary3, 5);
+skeletonImg = bwmorph(thinImg, 'skel', inf);
+figure(3), imshow(skeletonImg);
 
 %% Task 4: Determine the outline(s) of the image
 % This is done with two passes, saving the outline values in another matrix
@@ -135,7 +135,7 @@ writematrix(MatOutline, 'test4.txt')
 % figure, imshow(BW2);
 
 % Alternative Method: Image Processing Toolbox Function bwlabel
-MatBinary3 = 1 - MatBinary;
+MatBinary2 = 1 - MatBinary;
 [L, num] = bwlabel(MatBinary2);
 MatSegColor = label2rgb(L);
 figure(5), imshow(MatSegColor);
