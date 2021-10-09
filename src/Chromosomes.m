@@ -76,78 +76,10 @@ figure(2), imshow(MatBinary), title('Binary Image');
 
 %% Task 3: Determine a one-pixel thin image
 
-% find something for this ---------------------------------------
-% StrElems = {8};
-% 
-% StrElems(1) = boolean([0 0 0;0 1 0;1 1 1]);
-% StrElems(2) = boolean([0,0,0;1,1,0;0,1,0]);
-% StrElems(3) = boolean([1,0,0;1,1,0;1,0,0]);
-% StrElems(4) = boolean([0,1,0;1,1,0;0,0,0]);
-% StrElems(5) = boolean([1,1,1;0,1,0;0,0,0]);
-% StrElems(6) = boolean([0,1,0;0,1,1;0,0,0]);
-% StrElems(7) = boolean([0,0,1;0,1,1;0,0,1]);
-% StrElems(8) = boolean([0,0,0;0,1,1;0,1,0]);
-
-% SE1 = boolean([0 0 0;0 1 0;1 1 1]);
-% SE2 = boolean([0,0,0;1,1,0;0,1,0]);
-% SE3 = boolean([1,0,0;1,1,0;1,0,0]);
-% SE4 = boolean([0,1,0;1,1,0;0,0,0]);
-% SE5 = boolean([1,1,1;0,1,0;0,0,0]);
-% SE6 = boolean([0,1,0;0,1,1;0,0,0]);
-% SE7 = boolean([0,0,1;0,1,1;0,0,1]);
-% SE8 = boolean([0,0,0;0,1,1;0,1,0]);
-
-SE1 = [0 0 0;0 1 0;1 1 1];
-SE2 = [0,0,0;1,1,0;0,1,0];
-SE3 = [1,0,0;1,1,0;1,0,0];
-SE4 = [0,1,0;1,1,0;0,0,0];
-SE5 = [1,1,1;0,1,0;0,0,0];
-SE6 = [0,1,0;0,1,1;0,0,0];
-SE7 = [0,0,1;0,1,1;0,0,1];
-SE8 = [0,0,0;0,1,1;0,1,0];
-
-% SE1 = boolean([0;1;1]);
-% SE2 = boolean([1,1,0]);
-% SE3 = boolean([1;1;0]);
-% SE4 = boolean([0,1,1]);
-
-% SE1 = boolean([1;0;0]);
-% SE2 = boolean([0,0,1]);
-% SE3 = boolean([0;0;1]);
-% SE4 = boolean([1,0,0]);
-
-% disp(SE1);
-% disp(SE2);
-
-MatSkeleton = logical(1 - MatBinary);
-MatSkelPadded = padarray(MatSkeleton,[1 1],0);
-figure(9), imshow(MatSkelPadded), title('Debug Padded Image');
-% MatSkelPadded = imerode(MatSkelPadded,SE1);
-% i = 4
-while (true)
-    MatSkeletonPrevious = MatSkelPadded;
-    MatSkelPadded = imerode(MatSkelPadded,SE1);
-%     break
-    MatSkelPadded = imerode(MatSkelPadded,SE2);
-%     break
-    MatSkelPadded = imerode(MatSkelPadded,SE3);
-    MatSkelPadded = imerode(MatSkelPadded,SE4);
-    MatSkelPadded = imerode(MatSkelPadded,SE5);
-    MatSkelPadded = imerode(MatSkelPadded,SE6);
-    MatSkelPadded = imerode(MatSkelPadded,SE7);
-    MatSkelPadded = imerode(MatSkelPadded,SE8);
-%     break
-%     if (MatSkeletonPrevious == MatSkelPadded)
-%         break
-%     end
-end
-
-% StrElems = zeros(8);
-% SE0 = strel('square',3);
-% SE1 = SE1 + {0,0,0;0,1,0;1,1,1};
-
-% Display the outlined image
-figure(3), imshow(MatSkelPadded), title('Skeletonized Image');
+% Use a custom defined function (made by us) called skelerode, then display
+% the skeletonized image
+MatSkel = skelerode(MatBinary, rows, cols);
+figure(3), imshow(MatSkel), title('Skeletonized Image');
 
 % Alternative Method: Image Processing Toolbox Function bwareaopen, bwmorph
 % MatBinary2 = 1 - MatBinary;
@@ -166,7 +98,7 @@ MatOutline = MatOutline + 1;
 % For each row and column, scan for boundary numbers and input the boundary
 % into a third matrix
 for x = 1:(rows-1)
-    for y = 1:(cols)
+    for y = 1:cols
         checkone = MatBinary(y,x);
         checktwo = MatBinary(y,x+1);
         if (checkone == 0 & checktwo == 1)
@@ -190,7 +122,7 @@ for y = 1:(cols-1)
     end
 end
 % Display the outlined image
-% figure(4), imshow(MatOutline);
+figure(4), imshow(MatOutline), title('Outlined Image');
 
 % FOR TESTING ---------------------- EDIT THIS ---------------------------
 writematrix(MatOutline, 'test4.txt')
