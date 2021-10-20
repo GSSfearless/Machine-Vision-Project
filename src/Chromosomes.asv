@@ -33,7 +33,7 @@ debugthresh = ['Selected threshold value: ', num2str(threshold)];
 
 % Receive user input for the background color
 prompt = 'Please input the background color (B/W): ';
-backgroundcolor = input(prompt, 's');
+backgroundcolor = input(prompt 's');
 debugbgcolor = ['Selected background color: ', backgroundcolor];
 
 disp(debugfilename);
@@ -106,7 +106,7 @@ MatSkel = skelerode(MatBinary, rows, cols);
 
 if (backgroundcolor == 'B')
     MatBinary = 1 - MatBinary;
-    MatSkel = 1 - MatSkel;
+    MatSkel =
 end
 
 figure(3), imshow(MatSkel), title('Skeletonized Image');
@@ -161,13 +161,7 @@ figure(4), imshow(MatOutline), title('Outlined Image');
 %% Task 5: Segment the image to separate and label the different characters
 
 % Check the four-connectivity of every pixel using a custom function FourConnect 
-
-if (backgroundcolor == 'W')
-    MatFlipped = 1 - MatBinary;
-else
-    MatFlipped = MatBinary;
-end
-
+MatFlipped = 1 - MatBinary;
 [MatWorking, c, s, t] = FourConnect(MatFlipped);
 % Label different parts of the image using a custom function Label
 [MatSegmented, NumLabels] = Label(MatWorking, c, s, t);
@@ -186,8 +180,8 @@ for u = 1 : NumLabels
     SplitImage = imcrop(MatSegmented, thisChar);
 
     NumLabels = int8(NumLabels);
-    LabelRows = double(idivide(NumLabels,2,'ceil'));
-    subplot(2,LabelRows,u)
+    LabelRows = double(idivide(NumLabels,3,'ceil'));
+    subplot(3,LabelRows,u)
     imshow(SplitImage)
     Caption = sprintf('%d',u);
     title(Caption)
