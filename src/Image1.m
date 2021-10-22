@@ -213,5 +213,3 @@ imshow(rotImg)
 
 
 
-
-

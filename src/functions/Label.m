@@ -1,5 +1,5 @@
 %
-% Get the labeled iamge from the middle image
+% Get the labeled image from the middle image
 %
 % This part doesn't care about 4-connectivity or 8-connectity. Inputs are
 % segmented middle image (ImgIn), number of segmented parts (c), adjacent parts that
