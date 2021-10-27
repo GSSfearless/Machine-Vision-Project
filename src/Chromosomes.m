@@ -172,7 +172,9 @@ else
     MatFlipped = MatBinary;
 end
 
-[MatWorking, c, counttwo, countone] = FourConnect(MatFlipped);
+% Choose between Eight and Four connectivity
+[MatWorking, c, counttwo, countone] = EightConnect(MatFlipped);
+% [MatWorking, c, counttwo, countone] = FourConnect(MatFlipped);
 % Label different parts of the image using a custom function Label
 [MatSegmented, NumLabels] = Label(MatWorking, c, counttwo, countone);
 % Change gray to RGB and display the labeled parts 

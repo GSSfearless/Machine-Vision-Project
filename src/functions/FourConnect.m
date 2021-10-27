@@ -10,7 +10,7 @@ function [ImgOut, c, s, t] = FourConnect(ImgIn)
     t = [];
     % Expand the image from N*N to (N+1)*(N+1) to check all the pixels of
     % the original image
-    ImgIn = Expand(ImgIn);
+    ImgIn = padarray(ImgIn, [1 1], 0);
     c = 1;
     [m, n] = size(ImgIn);
     ImgOut = zeros([m, n]);
@@ -40,7 +40,7 @@ function [ImgOut, c, s, t] = FourConnect(ImgIn)
     end
     % The output image is (N+1)*(N+1), and it needs to be shrinked to N*N,
     % and it's the Middle Image of the whole processing
-    ImgOut = Shrink(ImgOut);
+    ImgOut = ImgOut(2:end-1,2:end-1);
     % c-1 is the final number of segmented parts
     c = c-1;
 end
