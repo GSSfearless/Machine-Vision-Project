@@ -18,3 +18,9 @@ ABCDEFGHIJKLMNOPQRS000
 change the number of rows crashing thing
 
 add degree input box
+
+
+TODO:
+Report introduction
+1-minute jap thing
+Prepare for oral intervoo
