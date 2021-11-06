@@ -12,15 +12,3 @@ ABCDEFGHIJKLMNOPQRS000
 0123456789009876543210
 0123456789009876543210
 0123456789009876543210
-
-
-
-change the number of rows crashing thing
-
-add degree input box
-
-
-TODO:
-Report introduction
-1-minute jap thing
-Prepare for oral intervoo
