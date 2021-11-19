@@ -2,86 +2,86 @@
 %%
 %clc; clear all; close all;
 clear;clc;close all
-% tic;
-% %location 
-% 
-% path_train='train.txt';
-% train_label = repmat(1,1,676)
-% test_label = repmat(1,1,676)
-% train_data = load(path_train);
-% [data_row,data_clown]=size(train_data);
-% 
-% 
-% %s1 = struct('train_data_1',train_data_1,'train_label_1',train_label_1,'test_data_1',test_data_1,'test_label_1',test_label_1)
-% 
-% 
-% 
-% %SOM network m*n
-% m=10;
-% n=10;
-% %Neuron som_sum
-% som_sum=m*n;
-% %weight initialize 
-% w = rand(som_sum, data_clown);
-% %Initialize learning rate
-% learn0 = 0.6;
-% learn_rate = learn0;
-% %learning para
-% learn_para=100;
-% %Setting iteration 
-% iter = 100;%1000 500
-% %Neuron location
-% [I,J] = ind2sub([m, n], 1:som_sum);
-% %Neighbor Initialize
-% neighbor0 =2;
-% neighbor_redius = neighbor0;
-% %Neighbor parameters
-% neighbor_para = 1000/log(neighbor0);
-% 
-% for t=1:iter 
-%     %  Scan all the sample points
-%     display(['Iteration: ' num2str(t)]);
-%     for j=1:data_row  
-%         %Getting the winner neuron
-%         data_x = train_data(j,:); 
-%         %Find the winner neuron
-%         [win_row, win_som_index]=min(dist(data_x,w'));  
-%         %Find the winner neuron position
-%         [win_som_row,win_som_cloumn] =  ind2sub([m, n],win_som_index);
-%         win_som=[win_som_row,win_som_cloumn];
-%         %Calculate and update the winner neuron neighbourhood position 
-%         %distance_som = sum(( ([I( : ), J( : )] - repmat(win_som, som_sum,1)) .^2) ,2);
-%         distance_som = exp( sum(( ([I( : ), J( : )] - repmat(win_som, som_sum,1)) .^2) ,2)/(-2*neighbor_redius*neighbor_redius)) ;
-%         %Update the weights
-%         for i = 1:som_sum
-%            % if distance_som(i)<neighbor_redius*neighbor_redius 
-%             w(i,:) = w(i,:) + learn_rate.*distance_som(i).*( data_x - w(i,:));
-%         end
-%     end
-%  
-%     %Updateing the learning rate
-%     learn_rate = learn0 * exp(-t/learn_para);   
-%     %Update the neighbor radius
-%     neighbor_redius = neighbor0*exp(-t/neighbor_para);  
-% end
-% 
-% 
-% 
-% %save as som_num
-% som_num=cell(1,size(w,1));
-% for i=1:size(w,1)
-%     som_num{1,i}=[];
-% end
-% %Every neuron data corresponding number
-% for num=1:data_row
-%     [som_row,clown]= min(sum(( (w - repmat(train_data(num,:), som_sum,1)) .^2) ,2));
-%     som_num{1,clown}= [som_num{1,clown},num];    
-% end
-% 
-% 
-% path1='som_num_1.mat';
-% save(path1,'som_num');
-% toc;
+tic;
+%location 
+
+path_train='train.txt';
+train_label = repmat(1,1,676)
+test_label = repmat(1,1,676)
+train_data = load(path_train);
+[data_row,data_clown]=size(train_data);
+
+
+%s1 = struct('train_data_1',train_data_1,'train_label_1',train_label_1,'test_data_1',test_data_1,'test_label_1',test_label_1)
+
+
+
+%SOM network m*n
+m=10;
+n=10;
+%Neuron som_sum
+som_sum=m*n;
+%weight initialize 
+w = rand(som_sum, data_clown);
+%Initialize learning rate
+learn0 = 0.6;
+learn_rate = learn0;
+%learning para
+learn_para=100;
+%Setting iteration 
+iter = 100;%1000 500
+%Neuron location
+[I,J] = ind2sub([m, n], 1:som_sum);
+%Neighbor Initialize
+neighbor0 =2;
+neighbor_redius = neighbor0;
+%Neighbor parameters
+neighbor_para = 1000/log(neighbor0);
+
+for t=1:iter 
+    %  Scan all the sample points
+    display(['Iteration: ' num2str(t)]);
+    for j=1:data_row  
+        %Getting the winner neuron
+        data_x = train_data(j,:); 
+        %Find the winner neuron
+        [win_row, win_som_index]=min(dist(data_x,w'));  
+        %Find the winner neuron position
+        [win_som_row,win_som_cloumn] =  ind2sub([m, n],win_som_index);
+        win_som=[win_som_row,win_som_cloumn];
+        %Calculate and update the winner neuron neighbourhood position 
+        %distance_som = sum(( ([I( : ), J( : )] - repmat(win_som, som_sum,1)) .^2) ,2);
+        distance_som = exp( sum(( ([I( : ), J( : )] - repmat(win_som, som_sum,1)) .^2) ,2)/(-2*neighbor_redius*neighbor_redius)) ;
+        %Update the weights
+        for i = 1:som_sum
+           % if distance_som(i)<neighbor_redius*neighbor_redius 
+            w(i,:) = w(i,:) + learn_rate.*distance_som(i).*( data_x - w(i,:));
+        end
+    end
+ 
+    %Updateing the learning rate
+    learn_rate = learn0 * exp(-t/learn_para);   
+    %Update the neighbor radius
+    neighbor_redius = neighbor0*exp(-t/neighbor_para);  
+end
+
+
+
+%save as som_num
+som_num=cell(1,size(w,1));
+for i=1:size(w,1)
+    som_num{1,i}=[];
+end
+%Every neuron data corresponding number
+for num=1:data_row
+    [som_row,clown]= min(sum(( (w - repmat(train_data(num,:), som_sum,1)) .^2) ,2));
+    som_num{1,clown}= [som_num{1,clown},num];    
+end
+
+
+path1='som_num_1.mat';
+save(path1,'som_num');
+toc;
 %%
 number1 = load('p_dataset_26/Sample1/img002-00001.mat')
 number2 = load('p_dataset_26/Sample2/img003-00001.mat')
